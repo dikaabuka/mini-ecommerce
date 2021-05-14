@@ -16,11 +16,18 @@ export class AuthService {
    ******************************
    */
 
-  static async loginUser ({ email, password }) {
+  static async loginUser ({
+    email,
+    password
+  }) {
     try {
       const fingerprint = await _getFingerprint()
       const response = await axios.post(`${API_URL}/login`,
-        { email, password, fingerprint },
+        {
+          email,
+          password,
+          fingerprint
+        },
         { withCredentials: true })
 
       const payload = {
@@ -40,13 +47,9 @@ export class AuthService {
         }
       }
 
-      localStorage.setItem('currentUser', JSON.stringify(payload.data))
-
-      $store.commit('userModule/SET_CURRENT_USER', payload.data)
-
       return new ResponseWrapper(payload, payload.data)
     } catch (error) {
-      // throw new ErrorWrapper(error)
+      throw new ErrorWrapper(error)
     }
   }
 
@@ -73,9 +76,9 @@ export class AuthService {
       })
       return new ResponseWrapper(response, response.data.data)
     } catch (error) {
-      // console.log(error.response.data.code)
       _resetAuthData()
-      $router.push({ name: 'login' }).catch(() => {})
+      $router.push({ name: 'login' }).catch(() => {
+      })
       throw new ErrorWrapper(error)
     }
   }
@@ -162,7 +165,7 @@ function _parseTokenData (accessToken) {
 }
 
 function _resetAuthData () {
-  // reset userData in store
+  // reset userData in store and localStorage
   localStorage.clear()
   $store.commit('userModule/SET_CURRENT_USER', {})
   $store.commit('authModule/SET_ATOKEN_EXP_DATE', null)
@@ -171,7 +174,10 @@ function _resetAuthData () {
   AuthService.setBearer('')
 }
 
-function _setAuthData ({ accessToken, exp } = {}) {
+function _setAuthData ({
+  accessToken,
+  exp
+} = {}) {
   AuthService.setRefreshToken('true')
   AuthService.setBearer(accessToken)
   $store.commit('auth/SET_ATOKEN_EXP_DATE', exp)
@@ -204,7 +210,6 @@ function _getFingerprint () {
       try {
         const components = await Fingerprint2.getPromise(options)
         const values = components.map(component => component.value)
-        // console.log('fingerprint hash components', components)
 
         return String(Fingerprint2.x64hash128(values.join(''), 31))
       } catch (e) {
@@ -213,10 +218,8 @@ function _getFingerprint () {
     }
 
     if (window.requestIdleCallback) {
-      // console.log('get fp hash @ requestIdleCallback')
       requestIdleCallback(async () => resolve(await getHash()))
     } else {
-      // console.log('get fp hash @ setTimeout')
       setTimeout(async () => resolve(await getHash()), 500)
     }
   })
