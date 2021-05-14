@@ -1,12 +1,10 @@
 import * as Fingerprint2 from 'fingerprintjs2'
 import * as UAParser from 'ua-parser-js'
 import axios from 'axios'
-
 import { Http } from './http.init'
 import { ResponseWrapper, ErrorWrapper } from './util'
 import $store from '../store'
 import $router from '../router'
-
 import { API_URL } from '../.env'
 
 let BEARER = ''
@@ -21,24 +19,42 @@ export class AuthService {
   static async loginUser ({ email, password }) {
     try {
       const fingerprint = await _getFingerprint()
-      const response = await axios.post(`${API_URL}/auth/login`,
+      const response = await axios.post(`${API_URL}/login`,
         { email, password, fingerprint },
         { withCredentials: true })
-      _setAuthData({
-        accessToken: response.data.data.accessToken,
-        exp: _parseTokenData(response.data.data.accessToken).exp
-      })
-      return new ResponseWrapper(response, response.data.data)
+
+      const payload = {
+        status: 200,
+        message: 'logged In Successfully',
+        data: {
+          ...response,
+          id: 1,
+          name: 'Dika',
+          firstName: 'Dika',
+          lastName: 'Abuka',
+          email: 'buzz@dabuka.com.ng',
+          username: 'devdika',
+          token: 'TnaKxCYqq4$_4^3bp?Q%wa>p)84fW/',
+          role: 'Merchant'
+
+        }
+      }
+
+      localStorage.setItem('currentUser', JSON.stringify(payload))
+
+      $store.commit('userModule/SET_CURRENT_USER', payload)
+
+      return new ResponseWrapper(payload, payload.data)
     } catch (error) {
-      throw new ErrorWrapper(error)
+      // throw new ErrorWrapper(error)
     }
   }
 
   static async logOutUser () {
     try {
-      const response = await new Http({ auth: true }).post('auth/logout', {}, { withCredentials: true })
+      const response = await new Http({ auth: true }).post('/logout', {}, { withCredentials: true })
       _resetAuthData()
-      $router.push({ name: 'login' }).catch(() => {})
+      $router.go('/login')
       return new ResponseWrapper(response, response.data.data)
     } catch (error) {
       throw new ErrorWrapper(error)
@@ -147,8 +163,9 @@ function _parseTokenData (accessToken) {
 
 function _resetAuthData () {
   // reset userData in store
-  $store.commit('user/SET_CURRENT_USER', {})
-  $store.commit('auth/SET_ATOKEN_EXP_DATE', null)
+  localStorage.clear()
+  $store.commit('userModule/SET_CURRENT_USER', {})
+  $store.commit('authModule/SET_ATOKEN_EXP_DATE', null)
   // reset tokens
   AuthService.setRefreshToken('')
   AuthService.setBearer('')

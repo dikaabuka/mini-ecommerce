@@ -5,5 +5,8 @@ export default {
     return UsersService.getCurrent()
       .then(user => commit('SET_CURRENT_USER', user.data))
       .catch(error => commit('toastModule/NEW', { type: 'error', message: error.message }, { root: true }))
+  },
+  SET_CURRENT_USER ({ commit }, payload) {
+    commit('SET_CURRENT_USER', payload)
   }
 }

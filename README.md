@@ -119,9 +119,22 @@ And use it in a template.
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:8080 for the client
 npm run serve
+
+# serve with hot reload at localhost:8080 for the server
+(this will be used for authentication)
+any username and password will do ..it's just dummy mock data
+
+
+npm run rest-api
 
 # build for production with minification
 npm run build
 ```
+
+# Please note
+
+other data used for the assignment are static as there wasnt enough time
+to wire them up but the code base caters for the assignment given.
+thank you
