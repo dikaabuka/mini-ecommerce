@@ -80,6 +80,7 @@
 import { AuthService } from '@/services/auth.service'
 import UiInputText from '@/components/form-elements/UiInputText.vue'
 import UiFormLoader from '@/components/form-loaders/UiFormLoader'
+import { BASE_URL } from '../.env'
 
 export default {
   name: 'Login',
@@ -135,7 +136,7 @@ export default {
 
           }
           this.inlineToast(payload)
-          await this.$router.push('/')
+          await window.location.replace(`${BASE_URL}/shop`)
         } catch (error) {
           this.$store.commit('toastModule/NEW', { type: 'error', message: error.message })
           this.error = error.status === 404 ? 'User with same email not found' : error.message
