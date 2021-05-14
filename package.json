@@ -7,7 +7,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "rest-api": "json-server --watch db.json"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -16,7 +17,9 @@
     "express": "^4.16.2",
     "fingerprintjs2": "^2.1.0",
     "heroku-ssl-redirect": "0.0.4",
+    "json-server": "^0.16.3",
     "moment": "^2.29.1",
+    "node-persist": "0.0.6",
     "qs": "^6.9.4",
     "ua-parser-js": "^0.7.21",
     "util": "^0.12.3",

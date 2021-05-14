@@ -135,9 +135,7 @@ export default {
 
           }
           this.inlineToast(payload)
-
-          await this.$store.dispatch('user/getCurrent')
-          await this.$router.push('store')
+          await this.$router.push('/')
         } catch (error) {
           this.$store.commit('toastModule/NEW', { type: 'error', message: error.message })
           this.error = error.status === 404 ? 'User with same email not found' : error.message
