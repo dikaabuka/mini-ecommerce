@@ -292,10 +292,6 @@ img {
 
 }
 
-.card:hover .card__image {
-  filter: contrast(20%);
-}
-
 .card__content {
   display: flex;
   flex: 1 1 auto;
@@ -309,10 +305,10 @@ img {
   background-size: cover;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
-  filter: contrast(60%);
   overflow: hidden;
   position: relative;
-  transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
+  border:6px solid #ffffff;
+
 }
 
 .card__image::before {
