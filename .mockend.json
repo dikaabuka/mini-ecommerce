@@ -1,0 +1,26 @@
+{
+  "Products": {
+    "id": "int",
+    "name": "string",
+    "type": "string",
+    "description": "string",
+    "createdAt": "date",
+     "image": "string"
+  },
+  "Types": {
+    "id": "int",
+    "name": "string",
+    "type": "string",
+    "description": "string",
+    "createdAt": "date"
+  },
+  "Users": {
+    "id": "int",
+    "username": "string",
+    "password": "string",
+    "role": "string",
+    "isActive": "boolean",
+    "avatar": "string"
+
+  }
+}
