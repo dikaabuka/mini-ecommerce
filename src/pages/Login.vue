@@ -80,16 +80,15 @@
 import { AuthService } from '@/services/auth.service'
 import UiInputText from '@/components/form-elements/UiInputText.vue'
 import UiFormLoader from '@/components/form-loaders/UiFormLoader'
+import $store from '@/store'
 import { BASE_URL } from '../.env'
 
 export default {
   name: 'Login',
-
   components: {
     UiInputText,
     UiFormLoader
   },
-
   data () {
     return {
       email: '',
@@ -104,7 +103,6 @@ export default {
 
     }
   },
-
   methods: {
     validateInput (type = 'login') {
       if (type === 'login') {
@@ -124,21 +122,25 @@ export default {
         this.message = 'Verifying Your Credentials'
         this.loadingStatus = 'loading'
         try {
-          await AuthService.loginUser({ email: this.email, password: this.password })
-          this.error = ''
-          const payload = {
-            status: 'success',
-            message: 'Verification Successful',
-            topIcon: 'fas fa-user-circle',
-            bottomIcon: 'fas fa-check-circle',
-            duration: 5000,
-            nextTask: 'none'
+          const response = await AuthService.loginUser({ email: this.email, password: this.password })
+          if (response) {
+            localStorage.setItem('currentUser', JSON.stringify(response.data))
+            $store.commit('userModule/SET_CURRENT_USER', response.data)
 
+            this.error = ''
+            const payload = {
+              status: 'success',
+              message: 'Verification Successful',
+              topIcon: 'fas fa-user-circle',
+              bottomIcon: 'fas fa-check-circle',
+              duration: 5000,
+              nextTask: 'none'
+            }
+            this.inlineToast(payload)
+            await window.location.replace(`${BASE_URL}/shop`)
           }
-          this.inlineToast(payload)
-          await window.location.replace(`${BASE_URL}/shop`)
         } catch (error) {
-          this.$store.commit('toastModule/NEW', { type: 'error', message: error.message })
+          // this.$store.commit('toastModule/NEW', { type: 'error', message: error.message })
           this.error = error.status === 404 ? 'User with same email not found' : error.message
 
           const payload = {

@@ -24,14 +24,20 @@ export async function initCurrentUserStateMiddleware (to, from, next) {
  */
 export function checkAccessMiddleware (to, from, next) {
   const currentUserId = JSON.parse(localStorage.getItem('currentUser')) ?? { email: '' }
-
   const isAuthRoute = to.matched.some(item => item.meta.isAuth)
 
   if (isAuthRoute && currentUserId.email !== '') return next()
   if (isAuthRoute) return next({ name: 'Login' })
+  if (to.name === 'Login' && currentUserId.email !== '') {
+    return next({ name: 'Shop' })
+  }
+
   next()
 }
 
+/**
+ * Set Page Meta Titles
+ */
 export function setPageTitleMiddleware (to, from, next) {
   const pageTitle = to.matched.find(item => item.meta.title)
 
