@@ -138,7 +138,21 @@ export default {
       }
 
       return defaultProductType
+    },
+    currentUser () {
+      const current = localStorage.getItem('currentUser')
+      if (current) {
+        return JSON.parse(current)
+      } else {
+        return {
+          token: null,
+          id: null,
+          email: null
+
+        }
+      }
     }
+
   },
 
   watch: {
@@ -202,13 +216,10 @@ export default {
   mounted () {
     this.getAllProducts()
     this.getAllProductTypes()
-
-    // Trigger Helper Notification after 5 Seconds then dismiss toast after 5 seconds
-    this.triggerHelperNotification(7000, 0)
+    this.triggerHelperNotification(4000, 0)
   },
 
   methods: {
-
     validateInput () {
       if (this.search.productName !== '') {
         const isValidInput = /^[a-zA-Z]+$/.test(this.search.productName.replace(/\s/g, ''))
@@ -347,24 +358,21 @@ export default {
     },
 
     triggerHelperNotification (duration, timer) {
+      if (this.currentUser.token === null) {
+        return
+      }
+
       setTimeout(() => {
         this.$toast.open({
           message:
-            `<p class="toast-title"><i aria-hidden="true" class="fas fa-lightbulb"></i> Search Tip</p>
-        <p class="toast-msg"> You can search for products by name and type </p>`,
+            `<p class="toast-title"><i aria-hidden="true" class="fas fa-lightbulb"></i> Welcome Back ${this.currentUser.name}</p>
+        <p class="toast-msg"> You can now search for products by name and type </p>`,
           type: 'info',
           duration,
           dismissible: true
 
         })
       }, timer)
-    },
-
-    showToast () {
-      this.$store.commit('toastModule/NEW', {
-        type: 'success',
-        message: 'hello'
-      })
     },
 
     ...mapActions({

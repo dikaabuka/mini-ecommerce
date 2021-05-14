@@ -14,7 +14,7 @@
         </li>
       </ul>
       <ul class="menu side">
-        <li v-if="!validUser">
+        <li v-if="!currentUser.token">
           <div>
             <router-link :to="{ name: 'Login' }">
               <i class="fas fa-sign-in-alt"></i> login
@@ -23,7 +23,7 @@
 
         </li>
 
-        <li v-if="validUser">
+        <li v-if="currentUser.token">
           <div @click="openOverlay('C')">
             <span class="cart-count">{{ cartCount }}</span>
             <i class="fas fa-shopping-cart"></i> Cart
@@ -31,7 +31,7 @@
 
         </li>
 
-        <li v-if="validUser">
+        <li v-if="currentUser.token">
           <div @click="openOverlay('O')">
             <span class="order-count">{{ orderCount }}</span>
             <i class="fab fa-shopify"></i> Orders
@@ -39,7 +39,7 @@
 
         </li>
 
-        <li v-if="validUser">
+        <li v-if="currentUser.token">
           <div class="logout-button" @click="logout()">
             <i class="fas fa-sign-out-alt"></i> logout
           </div>
@@ -100,14 +100,12 @@ export default {
     return {
       toggleOverlayMode: 'C',
       toggleOverlay: false,
-      loggedInUser: {},
       orders: [],
       cart: []
     }
   },
   computed: {
     ...mapState({
-      currentUserState: state => state.userModule.currentUser,
       ordersState: state => state.cartModule.orders,
       cartState: state => state.cartModule.products
     }),
@@ -117,24 +115,21 @@ export default {
     orderCount () {
       return this.ordersState.length
     },
-    validUser () {
-      if (this.currentUserState) {
-        return this.currentUserState.id !== ''
+    currentUser () {
+      const current = localStorage.getItem('currentUser')
+      if (current) {
+        return JSON.parse(current)
       } else {
-        return false
+        return {
+          token: null,
+          id: null,
+          email: null
+
+        }
       }
     }
   },
   watch: {
-    currentUserState: {
-      deep: true,
-      immediate: true,
-      handler (update) {
-        if (update) {
-          this.loggedInUser = JSON.parse(JSON.stringify(this.currentUserState))
-        }
-      }
-    },
     ordersState: {
       deep: true,
       immediate: true,

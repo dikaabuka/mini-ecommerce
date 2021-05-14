@@ -6,8 +6,7 @@ import { AuthService } from '@/services/auth.service'
  * @WARN Must be always first in middleware chain
  */
 export async function initCurrentUserStateMiddleware (to, from, next) {
-  const currentUserId = $store.state.userModule.currentUser.id
-
+  const currentUserId = $store.state.userModule.currentUser
   if (AuthService.hasRefreshToken() && !currentUserId) {
     try {
       await AuthService.debounceRefreshTokens()
@@ -24,10 +23,11 @@ export async function initCurrentUserStateMiddleware (to, from, next) {
  * Check access permission to auth routes
  */
 export function checkAccessMiddleware (to, from, next) {
-  const currentUserId = $store.state.userModule.currentUser.id
+  const currentUserId = JSON.parse(localStorage.getItem('currentUser')) ?? { email: '' }
+
   const isAuthRoute = to.matched.some(item => item.meta.isAuth)
 
-  if (isAuthRoute && currentUserId) return next()
+  if (isAuthRoute && currentUserId.email !== '') return next()
   if (isAuthRoute) return next({ name: 'Login' })
   next()
 }

@@ -5,7 +5,7 @@ import { Http } from './http.init'
 import { ResponseWrapper, ErrorWrapper } from './util'
 import $store from '../store'
 import $router from '../router'
-import { API_URL } from '../.env'
+import { API_URL, BASE_URL } from '../.env'
 
 let BEARER = ''
 
@@ -40,9 +40,9 @@ export class AuthService {
         }
       }
 
-      localStorage.setItem('currentUser', JSON.stringify(payload))
+      localStorage.setItem('currentUser', JSON.stringify(payload.data))
 
-      $store.commit('userModule/SET_CURRENT_USER', payload)
+      $store.commit('userModule/SET_CURRENT_USER', payload.data)
 
       return new ResponseWrapper(payload, payload.data)
     } catch (error) {
@@ -54,7 +54,7 @@ export class AuthService {
     try {
       const response = await new Http({ auth: true }).post('/logout', {}, { withCredentials: true })
       _resetAuthData()
-      $router.go('/login')
+      window.location.replace(`${BASE_URL}/login`)
       return new ResponseWrapper(response, response.data.data)
     } catch (error) {
       throw new ErrorWrapper(error)
