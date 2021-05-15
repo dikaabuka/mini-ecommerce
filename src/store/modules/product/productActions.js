@@ -54,6 +54,15 @@ export default {
               return product
             }
           })
+
+          // 4. A search one step further into descriptions if nothing is found
+          if (filteredProducts.length === 0) {
+            filteredProducts = products.filter((product) => {
+              if (ProductService.searchByValue(payload.productName.toLowerCase(), product.description.toLowerCase()) !== -1) {
+                return product
+              }
+            })
+          }
         }
 
         commit('GET_FILTERED_PRODUCTS', filteredProducts)

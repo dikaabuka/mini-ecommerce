@@ -21,7 +21,7 @@
           <div class="search-element">
             <UiInputText
               v-model="search.productName"
-              placeholder="Search for products by name"
+              placeholder="Search by name or description"
               :error="productNameError"
               :max-length="'30'"
               :after-padding="true"
@@ -190,7 +190,7 @@ export default {
           based on your search parameter
          </p>`,
               type: 'success',
-              duration: 5000,
+              duration: 4000,
               dismissible: true
 
             })
@@ -203,7 +203,7 @@ export default {
           based on your search parameter
          </p>`,
               type: 'default',
-              duration: 5000,
+              duration: 4000,
               dismissible: true
 
             })
@@ -231,7 +231,7 @@ export default {
               `<p class="toast-title"><i aria-hidden="true" class="fas fa-shield-virus"></i> Form Validation Message</p>
         <p class="toast-msg"> Kindly enter a product name without numbers . Only alphabets are allowed </p>`,
             type: 'error',
-            duration: 5000,
+            duration: 4000,
             dismissible: true
 
           })
@@ -251,7 +251,7 @@ export default {
             `<p class="toast-title"><i aria-hidden="true" class="fas fa-shield-virus"></i> Form Validation Message</p>
         <p class="toast-msg"> Kindly enter a product name or select a category to search for a product</p>`,
           type: 'error',
-          duration: 5000,
+          duration: 4000,
           dismissible: true
 
         })
@@ -316,7 +316,7 @@ export default {
                 Hi User, you've already purchased this item, kindly buy a similar item
               </p>`,
             type: 'info',
-            duration: 5000,
+            duration: 4000,
             dismissible: true
 
           })
@@ -334,7 +334,7 @@ export default {
                 Hi User, you've already added this item, kindly open your cart and complete your order
               </p>`,
             type: 'info',
-            duration: 5000,
+            duration: 4000,
             dismissible: true
 
           })
@@ -406,7 +406,7 @@ export default {
   .mt-100 {
     -moz-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
-    margin-top: 100px !important;
+    margin-top: 17% !important;
   }
 
   .break {
@@ -428,6 +428,11 @@ export default {
     box-shadow: 0 11px 15px -7px rgba(0, 0, 0, .2),
     0 24px 38px 3px rgba(0, 0, 0, .14),
     0 9px 46px 8px rgba(0, 0, 0, .12);
+
+    &:hover{
+      border: 2px solid #039be5;
+      cursor:pointer;
+    }
 
     .header {
       text-align: center;

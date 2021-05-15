@@ -137,7 +137,9 @@ export default {
               nextTask: 'none'
             }
             this.inlineToast(payload)
-            await window.location.replace(`${BASE_URL}/shop`)
+            await setTimeout(() => {
+              window.location.replace(`${BASE_URL}/shop`)
+            }, 1000)
           }
         } catch (error) {
           // this.$store.commit('toastModule/NEW', { type: 'error', message: error.message })
