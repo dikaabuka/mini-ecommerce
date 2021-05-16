@@ -5,91 +5,168 @@
       "name": "JavaScript Basics",
       "type": "books",
       "price": 250,
-      "description": "A small guide for JavaScript Beginners"
+      "description": "A small guide for JavaScript beginners and intermediates who needs some refreshing by Dika Abuka"
     },
     {
       "id": 2,
       "name": "HTML & CSS Basics",
       "type": "books",
-      "price": 195.9,
-      "description": "A small guide for Web Developers"
+      "price": 195.95,
+      "description": "A small guide for Web Developers and designers with little or no knowledge in programming by Dika Abuka"
     },
     {
       "id": 3,
       "name": "Vue.JS MasterClass",
       "type": "books",
-      "price": 469.9,
-      "description": "A comprehensive guide for javaScript Developers"
+      "price": 469.99,
+      "description": "A comprehensive guide for javaScript Developers who want to grow from zero to mastery by Dika Abuka"
     },
     {
       "id": 4,
-      "name": "Michael Jackson Discography",
+      "name": "Ultimate Collection",
       "type": "music",
-      "price": 1495.9,
-      "description": "A classic collection of Michael jackson\\'s greatest hits produced by Sony Studios"
+      "price": 1495.96,
+      "description": "A classic collection of Michael jackson's greatest hits from 1981 till date produced by Sony Studios"
     },
     {
       "id": 5,
-      "name": "Never Back Down Album by Elton John",
+      "name": "Premium Hits Collection",
       "type": "music",
-      "price": 278.9,
-      "description": "A classic 1980 premium album by Marvel Studios"
+      "price": 1278.55,
+      "description": "A classic premium collection of albums by Elton John from 1956 till date"
     },
     {
       "id": 6,
-      "name": "Kissed by a Rose Album by Seal",
+      "name": "Seal II Album",
       "type": "music",
       "price": 600.9,
-      "description": "A classic 1998 premium album by DC Studios"
+      "description": "By British singer Seal.The album was released in 1994 on ZTT and Sire Records."
     },
     {
       "id": 7,
       "name": "FIFA 2021",
       "type": "games",
       "price": 950,
-      "description": "FIFA Football game for PS5, PC, XBOX All in one by EA Sports"
+      "description": "FIFA 21 was published by Electronic Arts as part of the FIFA series EA Sports.Available on PlayStation 5, PC and Xbox One"
     },
     {
       "id": 8,
       "name": "Pro Evolution Soccer PES 2021",
       "type": "games",
-      "price": 935.99,
-      "description": "PES Football game for PS5, PC, XBOX All in one by Konami"
+      "price": 735.99,
+      "description": "Konami's 2021 Season brings amazing features that won the E3 2019's Best Sports Game award. Available on PlayStation 5 and Xbox One"
     },
     {
       "id": 9,
       "name": "Street Fighter XII",
       "type": "games",
       "price": 375.49,
-      "description": "Street Fight combat game by Capcom for for PS5, PC, XBOX All "
+      "description": "Street Fight combat game by Capcom featuring over 100 characters for PlayStation 5, Xbox One, PC"
     },
     {
       "id": 10,
       "name": "Node.JS Fundamentals",
       "type": "books",
       "price": 525.49,
-      "description": "A comprehensive guide to backend development with NodeJs"
+      "description": "A comprehensive guide to backend development with NodeJs by Dika Abuka"
     },
     {
       "id": 11,
-      "name": "Love is the greatest Album by Celine Dion",
+      "name": "Falling into You Album",
       "type": "music",
       "price": 185.49,
-      "description": "A premium collection of Celine Dion from 1998 - 2012"
+      "description": "The 4th English-language studio album by Canadian singer Celine Dion, released on 11 March 1996 by Columbia/Epic Records."
     },
     {
       "id": 12,
-      "name": "NBA 2K21 by EA Sports",
+      "name": "NBA 2K21",
       "type": "games",
       "price": 1025.49,
-      "description": "Best Basketball game with premium updates, transfers for PS5, PC and Xbox by EA Sports"
+      "description": "NBA 2K21 is a basketball simulation video game that was developed by Visual Concepts and published by 2K Sports for PlayStation 5, Xbox One, PC."
     },
     {
       "id": 13,
       "name": "Marvels Avengers",
       "type": "games",
       "price": 659.99,
-      "description": "Amazing adventures with multiple heroes and villains produced by marvel for PS5, PC and Xbox"
+      "description": "Amazing adventures with multiple heroes and villains produced by marvel for PlayStation 5, Xbox One, PC."
+    },
+    {
+      "id": 14,
+      "name": "Nevermind Classic Album",
+      "type": "music",
+      "price": 529.99,
+      "description": "Nevermind is the 2nd studio album by American rock band Nirvana, released on September 24, 1991 by DGC Records. Produced by Butch Vig"
+    },
+    {
+      "id": 15,
+      "name": "Thriller Classic Album",
+      "type": "music",
+      "price": 753.99,
+      "description": "Thriller is the sixth studio album by American singer Michael Jackson, released on November 30, 1982, by Epic Records"
+    },
+    {
+      "id": 16,
+      "name": "Rumours Classic Album",
+      "type": "music",
+      "price": 829.99,
+      "description": "Rumours is the eleventh studio album by British-American rock band Fleetwood Mac, released on 4 February 1977 by Warner Bros"
+    },
+    {
+      "id": 17,
+      "name": "The Push",
+      "type": "books",
+      "price": 45.55,
+      "description": "Fans of Ashely Audrain and psychological thrillers, crack open this one about the relationship between mothers and daughters."
+    },
+    {
+      "id": 18,
+      "name": "A Crooked Tree",
+      "type": "books",
+      "price": 49.95,
+      "description": "This novel Una Mannion drives home how one moment of outburst in any environment can change everything."
+    },
+    {
+      "id": 19,
+      "name": "Let Me Tell You What I Mean",
+      "type": "books",
+      "price": 57.99,
+      "description": "Written by Joan Didion, this novel includes a Gamblers Anonymous meeting, writing itself and her own doubts about it all."
+    },
+    {
+      "id": 20,
+      "name": "LEGO Star Wars: The Skywalker Saga",
+      "type": "games",
+      "price": 950,
+      "description": "This is an upcoming Lego-themed action-adventure game available on PC, PlayStation 5 and Xbox One"
+    },
+    {
+      "id": 21,
+      "name": "Monster Jam Steel Titans 2",
+      "type": "games",
+      "price": 950,
+      "description": "Best racing video game with immersive experience available on PlayStation 5, Xbox One, PC."
+    },
+    {
+      "id": 22,
+      "name": "Age of Empires IV",
+      "type": "games",
+      "price": 899.99,
+      "description": "Age of Empires IV is an upcoming real-time strategy video game developed by Relic Entertainment and published by Xbox Game Studios."
+    },
+    {
+      "id": 23,
+      "name": "The Wife Upstairs",
+      "type": "book",
+      "price": 68.55,
+      "description": "A novel about secrets, scandals, plots and revelations written by Rachael Hawkins"
+    },
+    {
+      "id": 25,
+      "name": "Khaled Khaled Album",
+      "type": "music",
+      "price": 950,
+      "description": "The 12th studio album by American hip hop producer DJ Khaled released on April 30, 2021, by We the Best Music, Roc Nation and Epic Records."
     }
   ],
   "productTypes": [
@@ -125,8 +202,8 @@
     }
   },
   "login": {
-    "email": "engineering@jetstrea",
-    "password": "11111",
+    "email": "dikadev",
+    "password": "12345",
     "fingerprint": "62d8fdab75197de34c3aa998a0ec2790"
   },
   "logout": {},

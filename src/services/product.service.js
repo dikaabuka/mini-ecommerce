@@ -1,5 +1,4 @@
 import { ErrorWrapper, ResponseWrapper } from './util'
-import store from '@/store'
 import { BaseService } from './base.service'
 
 export class ProductService extends BaseService {
@@ -31,14 +30,6 @@ export class ProductService extends BaseService {
       }
     }
     return -1 // Not found
-  }
-
-  static resetFilteredProducts () {
-    return []
-  }
-
-  static clearAllProducts () {
-    return []
   }
 
   static async getAllProducts () {
@@ -83,41 +74,11 @@ export class ProductService extends BaseService {
     }
   }
 
-  static getFilteredProductsOld (args) {
-    if (args) {
-      const products = store.state.productModule.products
-      let filteredProducts = []
-      if (args.productName === '' && args.productType.toLowerCase() !== 'all') {
-        // 1. Filter by only category where no product name is entered
-        filteredProducts = products.filter((product) => {
-          return product.type === args.productType.toLowerCase()
-        })
-      } else if (args.productName !== '' && args.productType.toLowerCase() !== 'all') {
-        // 2. Filter by category then search for product match in that category
-        filteredProducts = products.filter((product) => {
-          if (ProductService.searchByValue(args.productName.toLowerCase(), product.name.toLowerCase()) !== -1 &&
-            (product.type).toLowerCase() === args.productType.toLowerCase()) {
-            return product
-          }
-        })
-      } else {
-        // 3. Filter by name search all products regardless of category
-        filteredProducts = products.filter((product) => {
-          if (ProductService.searchByValue(args.productName.toLowerCase(), product.name.toLowerCase()) !== -1) {
-            return product
-          }
-        })
-      }
+  static resetFilteredProducts () {
+    return []
+  }
 
-      const response = {
-        status: 200,
-        data: filteredProducts
-      }
-      const data = {
-        content: response.data,
-        total: response.data.length
-      }
-      return new ResponseWrapper(response, data)
-    }
+  static clearAllProducts () {
+    return []
   }
 }
