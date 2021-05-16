@@ -17,7 +17,7 @@
               </div>
               <div class="half">
                 <div class="card-price">
-                  €{{ product.price }}
+                  €{{ $formatAmount(product.price) }}
                 </div>
               </div>
 
@@ -26,17 +26,21 @@
               {{ product.description }}
             </p>
             <div class="card-quantity">
+              <div></div>
               <UiInputText
                 v-model="products[`item_${product.id}`]"
                 :type="'number'"
-                placeholder="Enter Quantity"
+                placeholder="Quantity"
                 :error="quantityError"
                 :max-length="'30'"
                 :after-padding="true"
-                onkeydown="javascript: return event.keyCode == 69 ? false : true"
+                onkeydown="return event.keyCode!==69"
               >
                 <div slot="before">
                   <i aria-hidden="true" class="fas fa-euro-sign"></i>
+                </div>
+                <div slot="bottom" class="align-left dont-display">
+                  {{ newPriceByQuantity(product) }}
                 </div>
               </UiInputText>
             </div>
@@ -145,6 +149,25 @@ export default {
 
         })
       }
+    },
+    newPriceByQuantity (product) {
+      if (product) {
+        const quantity = this.products[`item_${product.id}`] ?? 1
+        return `€${this.$formatAmount(parseFloat(product.price * quantity).toFixed(2))}`
+      } else {
+        return '€0'
+      }
+    },
+    getKey (event) {
+      const pressed = event.keyCode
+      let proceed = true
+
+      console.log(event)
+
+      if (pressed === 69 || pressed === 190) {
+        proceed = false
+      }
+      return proceed
     }
   },
   watch: {
@@ -307,7 +330,7 @@ img {
   border-top-right-radius: 2px;
   overflow: hidden;
   position: relative;
-  border:6px solid #ffffff;
+  border: 6px solid #ffffff;
 
 }
 
@@ -434,14 +457,14 @@ img {
 }
 
 .background_8 {
-  background: #3CA55C;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #B5AC49, #3CA55C);  /* Chrome 10-25, Safari 5.1-6 */
+  background: #3CA55C; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #B5AC49, #3CA55C); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #B5AC49, #3CA55C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .background_9 {
-  background: #c21500;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #ffc500, #c21500);  /* Chrome 10-25, Safari 5.1-6 */
+  background: #c21500; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ffc500, #c21500); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #ffc500, #c21500); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -452,8 +475,8 @@ img {
 }
 
 .background_11 {
-  background: #DD5E89;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #F7BB97, #DD5E89);  /* Chrome 10-25, Safari 5.1-6 */
+  background: #DD5E89; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #F7BB97, #DD5E89); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #F7BB97, #DD5E89); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -506,8 +529,8 @@ img {
 }
 
 .background_20 {
-  background: #4776E6;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #8E54E9, #4776E6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: #4776E6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #8E54E9, #4776E6); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #8E54E9, #4776E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -518,8 +541,8 @@ img {
 }
 
 .background_22 {
-  background: #076585;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #10b1ea, #076585);  /* Chrome 10-25, Safari 5.1-6 */
+  background: #076585; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #10b1ea, #076585); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #10afe9, #076585); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -536,8 +559,8 @@ img {
 }
 
 .background_25 {
-  background: #00416A;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #FFE000, #799F0C, #00416A);  /* Chrome 10-25, Safari 5.1-6 */
+  background: #00416A; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FFE000, #799F0C, #00416A); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #FFE000, #799F0C, #00416A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 

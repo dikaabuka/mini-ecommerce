@@ -23,10 +23,10 @@
               <h3 class="name">
                 <i class="card-type-icon" :class="categoryIcon(product.type)"/>
                 <span class="card-type-text">
-                  {{ product.name }} x {{ `${product.quantity} cop${product.quantity === 1 ? 'y' : 'ies'}` }}
+                  {{ product.name }} <span class="concat">x</span> {{ `${product.quantity} cop${product.quantity === 1 ? 'y' : 'ies'}` }}
                 </span>
               </h3>
-              <p class="price"> €{{ product.price }}</p>
+              <p class="price"> €{{ $formatAmount(product.price) }}</p>
             </li>
           </ul>
         </div>
@@ -38,7 +38,7 @@
             <i class="fab fa-shopify"/> {{ orderCount }}
             Order{{ orderCount > 1 ? 's' : '' }}
           </div>
-          <div class="total">€{{ orderTotal }}</div>
+          <div class="total">€{{ $formatAmount(orderTotal) }}</div>
         </section>
         <section v-else class="no-order">
 
@@ -432,6 +432,11 @@ ul {
   -webkit-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
   transition: all 0.4s ease;
+}
+
+.concat {
+  color: crimson;
+  font-weight: 600;
 }
 
 </style>

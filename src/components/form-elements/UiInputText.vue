@@ -16,9 +16,14 @@
         :style="inputHeight"
         :class="inputClasses"
         :value="value"
+        :disabled="readOnly"
         :maxlength="maxLength"
         :placeholder="placeholder"
-        v-on="listeners">
+        :max="type === 'number' ? '1000000' : null"
+        :min="type === 'number' ? '1' : null"
+        v-on="listeners"
+        @blur="handleQuantity"
+      >
 
       <div class="slot-bottom" v-if="$slots.bottom">
         <slot name="bottom"/>
@@ -49,6 +54,10 @@ export default {
       type: Boolean,
       default: false
     },
+    readOnly: {
+      type: Boolean,
+      default: false
+    },
     afterPadding: {
       type: Boolean,
       default: false
@@ -70,6 +79,14 @@ export default {
       const min = 1
       const max = 1000000000
       return Math.floor(Math.random() * (max - min + 1) + min)
+    },
+    handleQuantity () {
+      if (this.type === 'number' && (this.value === '0' ||
+        this.value.charAt(0) === '0' ||
+        this.value.charAt(0) === '.' ||
+        this.value === '')) {
+        this.$emit('input', '1')
+      }
     }
   },
 

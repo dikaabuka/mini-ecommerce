@@ -33,6 +33,21 @@ export default {
 
   REMOVE_FROM_CART (state, payload) {
     state.products = state.products.filter(({ id }) => id !== payload.id)
+    this._vm.$toast.open({
+      message:
+        `<p class="toast-title">
+          <i aria-hidden="true" class="fas fa-lightbulb"></i>
+           Cart Notification
+        </p>
+        <p class="toast-msg">
+          ${payload.name.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}
+          has been removed from your cart
+        </p>`,
+      type: 'success',
+      duration: 5000,
+      dismissible: true
+
+    })
   },
 
   UPDATE_CART (state, payload) {
