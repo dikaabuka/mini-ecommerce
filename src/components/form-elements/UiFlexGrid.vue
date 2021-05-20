@@ -60,7 +60,7 @@
 
               >
                 Buy Now
-                <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                <i class="fas fa-credit-card" aria-hidden="true"></i>
 
               </button>
             </div>
