@@ -124,8 +124,12 @@ export default {
         try {
           const response = await AuthService.loginUser({ email: this.email, password: this.password })
           if (response) {
-            localStorage.setItem('currentUser', JSON.stringify(response.data))
-            $store.commit('userModule/SET_CURRENT_USER', response.data)
+            const data = {
+              ...response.data
+            }
+            data.expiryDate = new Date()
+            localStorage.setItem('currentUser', JSON.stringify(data))
+            $store.commit('userModule/SET_CURRENT_USER', data)
 
             this.error = ''
             const payload = {

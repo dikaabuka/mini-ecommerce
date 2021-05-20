@@ -62,8 +62,8 @@
       <!-- Cart -->
       <div v-if="toggleOverlayMode === 'C'">
         <UiCart
-        @closeOverlayHandler="closeOverlay"
-        @checkOutHandler="handleProduct"
+          @closeOverlayHandler="closeOverlay"
+          @checkOutHandler="handleProduct"
         />
       </div>
 
@@ -152,6 +152,24 @@ export default {
   },
   methods: {
 
+    validateToken () {
+      const session = JSON.parse(localStorage.getItem('currentUser'))
+      if (!session || !session.expiryDate) return
+
+      const currentDate = { date: new Date() }
+      const loginTime = new Date(session.expiryDate)
+      const currentTime = new Date(currentDate.date)
+      const tempDiff = Math.abs(currentTime - loginTime)
+      const diff = tempDiff / 36e5
+
+      console.log(Math.round(diff), process.env.TOKEN_LIFESPAN)
+
+      if (Math.round(diff) >= process.env.TOKEN_LIFESPAN) {
+        console.log(diff)
+        this.logout()
+      }
+    },
+
     openOverlay (mode) {
       this.toggleOverlayMode = mode
       this.toggleOverlay = true
@@ -185,6 +203,9 @@ export default {
       emptyCart: 'cartModule/EMPTY_CART'
       // Cart Actions
     })
+  },
+  created () {
+    this.validateToken()
   }
 
 }
